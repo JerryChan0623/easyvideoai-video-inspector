@@ -1,0 +1,11 @@
+{
+  "name": "easyvideoai-video-inspector",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local video metadata inspection and centered crop previews, made by EasyVideoAI.",
+  "license": "MIT",
+  "homepage": "https://easyvideoai.com",
+  "repository": { "type": "git", "url": "https://github.com/JerryChan0623/easyvideoai-video-inspector.git" },
+  "scripts": { "test": "node --test tests/*.test.cjs" },
+  "engines": { "node": ">=20" }
+}

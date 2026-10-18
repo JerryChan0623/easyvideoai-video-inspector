@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Check video dimensions, duration, aspect ratio and file size locally. Preview centered crops for vertical, square and landscape video. No upload required.">
+  <meta name="theme-color" content="#f7f7f2">
+  <title>Free Video Inspector — Dimensions &amp; Crop Preview | EasyVideoAI</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="metrics.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to inspector</a>
+  <header class="site-header">
+    <a class="brand" href="https://easyvideoai.com/?utm_source=github&utm_medium=referral&utm_campaign=video_inspector" aria-label="EasyVideoAI homepage"><span class="brand-mark" aria-hidden="true">e</span> EasyVideoAI<span class="label"> / tools</span></a>
+    <a class="source-link" href="https://github.com/JerryChan0623/easyvideoai-video-inspector">View source <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main">
+    <section class="intro" aria-labelledby="title">
+      <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> FREE · OPEN SOURCE · NO UPLOAD</p>
+      <h1 id="title">Know your video.<br><span>Before you share it.</span></h1>
+      <p class="lede">Check dimensions, duration and file size. See what a vertical or square crop would cut away. Everything runs in your browser.</p>
+    </section>
+    <section class="inspector" aria-label="Local video inspector">
+      <div id="dropzone" class="dropzone">
+        <span class="upload-icon" aria-hidden="true">↑</span>
+        <h2>Drop a video here</h2>
+        <p>Or choose a file from your device.</p>
+        <button class="primary" id="choose" type="button">Choose a video <span aria-hidden="true">↗</span></button>
+        <input id="file" type="file" accept="video/*,.mp4,.mov,.webm,.m4v,.ogv" hidden>
+        <p class="fine">MP4, MOV, WebM and other browser-supported videos.<br>Your file stays on this device. No account needed.</p>
+      </div>
+      <p id="status" role="status" class="status"></p>
+      <p id="error" role="alert" class="error" hidden></p>
+      <section id="results" class="results" aria-labelledby="file-title" hidden>
+        <div class="result-heading"><div><p class="eyebrow">YOUR VIDEO</p><h2 id="file-title"></h2></div><button id="clear" class="secondary" type="button">Clear file</button></div>
+        <dl class="metrics">
+          <div><dt>Dimensions</dt><dd id="dimensions"></dd></div>
+          <div><dt>Duration</dt><dd id="duration"></dd></div>
+          <div><dt>Aspect ratio</dt><dd id="ratio"></dd></div>
+          <div><dt>File size</dt><dd id="size"></dd></div>
+        </dl>
+        <div class="preview-layout">
+          <div class="preview-box"><div id="stage" class="stage"><video id="video" preload="metadata" playsinline controls aria-label="Local video preview"></video><div id="crop-overlay" class="crop-overlay" hidden aria-hidden="true"></div></div><p class="preview-caption">The outlined area stays. Shaded edges would be cropped.</p></div>
+          <div class="framing">
+            <p class="eyebrow">CHECK YOUR FRAMING</p><h3>What stays in the frame?</h3>
+            <label for="target">Centered crop preview</label>
+            <select id="target"><option value="original">Original — keep the full frame</option><option value="9:16">9:16 — vertical</option><option value="1:1">1:1 — square</option><option value="16:9">16:9 — landscape</option></select>
+            <p id="crop-note" class="crop-note"></p>
+            <p class="fine">This visual guide does not edit or export your video. Watch the entire clip to check faces, hands and movement near the edges.</p>
+            <div class="actions"><button id="copy" class="secondary" type="button">Copy report</button><button id="download" class="secondary" type="button">Save JSON</button></div>
+            <details><summary>More about this file</summary><dl class="more"><dt>Orientation</dt><dd id="orientation"></dd><dt>Browser MIME type</dt><dd id="mime"></dd><dt>Estimated total bitrate</dt><dd id="bitrate"></dd></dl><p class="fine">Bitrate is estimated from file size ÷ duration and includes container overhead and any audio. The browser does not reliably expose codec, frame rate or audio presence here. Reading metadata does not guarantee playback or acceptance by a social platform.</p></details>
+          </div>
+        </div>
+        <div id="report-fallback" hidden><label for="report-text">Copy this report manually</label><textarea id="report-text" rows="12" readonly></textarea></div>
+      </section>
+    </section>
+    <section class="how" aria-label="How the inspector works"><div><span class="step">01 / LOCAL</span><h2>Your video stays yours.</h2><p>We read metadata from the file you select. No upload, analytics, cookies or third-party scripts in this tool.</p></div><div><span class="step">02 / FRAMING</span><h2>Check the edges.</h2><p>A 9:16 crop can remove a second character or a raised hand. Preview the framing before editing your final clip.</p></div><div><span class="step">03 / REVIEW</span><h2>Look beyond the numbers.</h2><p>Play the whole video with sound. Dimensions alone cannot tell you if identities, movement or audio timing look right.</p></div></section>
+    <aside class="product"><div><p class="eyebrow">MADE BY EASYVIDEOAI</p><h2>Put your photos in motion.</h2><p>Create a video from your photos with prepared dance and character templates. Preview the scene and review the credit quote before generating.</p></div><a class="primary" href="https://easyvideoai.com/?utm_source=github&utm_medium=referral&utm_campaign=video_inspector">Explore EasyVideoAI <span aria-hidden="true">↗</span></a></aside>
+    <section class="faq" aria-labelledby="faq-title"><h2 id="faq-title">A few useful answers.</h2><details><summary>Does this upload or store my video?</summary><p>No. The page uses a temporary browser object URL to read the selected local file. It does not send the video to a server or save it in browser storage. Clear the file or close the page when finished. If hosted online, the hosting provider receives normal page requests; the video is not part of them.</p></details><details><summary>Why won't my video open?</summary><p>The container or codec may not be supported by your browser, or the file may be damaged. Try another browser or export an MP4 with a browser-supported codec. This tool does not transcode files.</p></details><details><summary>Can I upload this video to EasyVideoAI?</summary><p>EasyVideoAI's current studios use prepared video templates and accept character photos, rather than custom source videos. This inspector is useful for reviewing downloaded results or any other local video.</p></details><details><summary>Is the inspector free? Is AI generation also free?</summary><p>The inspector is free and works without an account. EasyVideoAI video generation is a separate paid service using credits. Public demonstrations can be watched free of charge.</p></details></section>
+  </main>
+  <footer><span>EasyVideoAI Video Inspector · MIT licensed</span><a href="https://github.com/JerryChan0623/easyvideoai-video-inspector">Source &amp; issues ↗</a></footer>
+</body>
+</html>
